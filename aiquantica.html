@@ -69,6 +69,7 @@
       .ai-button:disabled {
         background-color: #556c7e;
         cursor: not-allowed;
+        transform: scale(1);
       }
 
       .ai-response-container {
@@ -140,7 +141,7 @@
                         </button>
                     </div>
                     <div id="ai-response-container" class="ai-response-container">
-                         <div id="ai-response" class="text-slate-700 dark:text-slate-300 whitespace-pre-wrap flex-1 pt-1">Aguardando sua pergunta...</div>
+                         <div id="ai-response">Aguardando sua pergunta...</div>
                     </div>
                 </div>
             </div>
@@ -179,14 +180,31 @@
             submitButton.disabled = true;
 
             try {
-                const systemPrompt = "Você é um físico quântico e um excelente professor. Sua missão é explicar conceitos complexos de computação quântica de forma clara, simples e empolgante para um público leigo e curioso. Use analogias do dia a dia sempre que possível. Responda em português do Brasil. Comece a resposta indo direto ao ponto, explicando o conceito solicitado. Mantenha as respostas concisas, mas informativas, idealmente em 1 ou 2 parágrafos. Finalize sempre incentivando a curiosidade do usuário e lembrando que este é um campo em rápida evolução.";
+                const systemPrompt = "Você é um físico quântico e um excelente professor. Sua missão é explicar conceitos complexos de computação quântica de forma clara, simples e empolgante para um público leigo e curioso. Use analogias do dia a dia sempre que possível. Responda em português do Brasil. Comece a resposta indo direto ao ponto, explicando o conceito solicitado. Mantenha as respostas concisas, mas informativas, idealmente em 2 ou 3 parágrafos. Finalize sempre incentivando a curiosidade do usuário e lembrando que este é um campo em rápida evolução.";
 
                 const apiKey = "AIzaSyBJ9nH-oCNQj9QIoHxsGIeO0QORydJSKpI";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+                // ATUALIZAÇÃO: Alterado para o modelo gemini-2.5-flash-preview
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
                 const payload = {
-                    contents: [{ parts: [{ text: query }] }],
-                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                    contents: [{
+                        parts: [{ text: query }]
+                    }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                    generationConfig: {
+                      "temperature": 0.7,
+                      "topK": 1,
+                      "topP": 1,
+                      "maxOutputTokens": 2048,
+                    },
+                    safetySettings: [
+                      { "category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+                      { "category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+                      { "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+                      { "category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+                    ]
                 };
 
                 const response = await fetch(apiUrl, {
@@ -195,11 +213,13 @@
                     body: JSON.stringify(payload)
                 });
 
+                const result = await response.json();
+
                 if (!response.ok) {
-                    throw new Error(`Erro na API: ${response.statusText}`);
+                    const errorDetails = result?.error?.message || response.statusText;
+                    throw new Error(`Erro na API: ${errorDetails}`);
                 }
 
-                const result = await response.json();
                 const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
 
                 if (text) {
@@ -209,12 +229,12 @@
                         .replace(/\n/g, '<br>');
                     responseDiv.innerHTML = formattedText;
                 } else {
-                    throw new Error("Resposta da IA inválida.");
+                    throw new Error("A resposta da IA não continha texto válido.");
                 }
 
             } catch (error) {
                 console.error("Erro no Assistente IA:", error);
-                responseDiv.textContent = "Desculpe, ocorreu uma anomalia quântica. Não consegui processar sua pergunta. Tente novamente.";
+                responseDiv.innerHTML = `<strong>Desculpe, ocorreu uma anomalia quântica.</strong><br><br>Não consegui processar sua pergunta.<br><br><i>Detalhe do erro: ${error.message}</i>`;
             } finally {
                 submitButton.disabled = false;
             }
@@ -222,7 +242,7 @@
 
         submitButton.addEventListener('click', handleAIAssistant);
         promptInput.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter') {
+          if (event.key === 'Enter' && !submitButton.disabled) {
             handleAIAssistant();
           }
         });
