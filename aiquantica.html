@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IA Quântica</title>
-
+    
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Sen:400,700,800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@0.378.0/dist/umd/lucide.min.js"></script>
-
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
-      /* Estilos adaptados para o Assistente Quântico */
       .ai-container {
         background-color: rgba(10, 20, 40, 0.8);
         border: 1px solid #00ffff;
@@ -23,13 +22,11 @@
         box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
         backdrop-filter: blur(5px);
       }
-
       .ai-input-group {
         display: flex;
         gap: 10px;
         margin-top: 20px;
       }
-
       .ai-input {
         flex-grow: 1;
         background-color: #0d1a2f;
@@ -40,14 +37,11 @@
         font-family: 'Poppins', sans-serif;
         font-size: 16px;
       }
-      .ai-input::placeholder {
-        color: #556c7e;
-      }
+      .ai-input::placeholder { color: #556c7e; }
       .ai-input:focus {
         outline: none;
         box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
       }
-
       .ai-button {
         background-color: #00ffff;
         color: #000;
@@ -71,7 +65,6 @@
         cursor: not-allowed;
         transform: scale(1);
       }
-
       .ai-response-container {
         background-color: #0d1a2f;
         border: 1px solid #00ffff;
@@ -79,13 +72,9 @@
         padding: 20px;
         margin-top: 25px;
         min-height: 150px;
-        color: #cfcfcf;
-        font-family: 'Poppins', sans-serif;
         line-height: 1.8;
       }
-      .ai-response-container strong {
-        color: #00ffff;
-      }
+      .ai-response-container strong { color: #00ffff; }
       .ai-response-container .loading-spinner {
         display: inline-block;
         width: 20px;
@@ -96,200 +85,182 @@
         animation: spin 1s ease-in-out infinite;
         margin-right: 10px;
       }
-      @keyframes spin {
-        to { transform: rotate(360deg); }
-      }
-
-      /* NOVO: Estilo para o cursor piscante */
+      @keyframes spin { to { transform: rotate(360deg); } }
       #ai-response.is-typing::after {
         content: '▋';
         color: #00ffff;
         animation: blink 1s step-end infinite;
       }
-
       @keyframes blink {
         from, to { color: transparent; }
         50% { color: #00ffff; }
       }
     </style>
-
-  </head>
-  <body>
-    <div class="header_section">
-      <div class="container">
-        <nav class="nav-futuristic">
-          <ul>
+</head>
+<body>
+    <header class="header_section">
+        <div class="container">
+            <nav class="nav-futuristic">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="aiquantica.html" class="active">IA Quântica</a></li>
+                    <li><a href="funcionamento.html">Funcionamento</a></li>
+                    <li><a href="aplicacoes.html">Aplicações</a></li>
+                    <li><a href="futuro.html">Futuro</a></li>
+                    <li><a href="maquete.html">Maquete</a></li>
+                </ul>
+            </nav>
+            <button class="menu_mobile_button"><i data-lucide="menu"></i></button>
+        </div>
+    </header>
+    
+    <div class="mobile_menu">
+        <ul>
             <li><a href="index.html">Início</a></li>
             <li><a href="aiquantica.html" class="active">IA Quântica</a></li>
             <li><a href="funcionamento.html">Funcionamento</a></li>
             <li><a href="aplicacoes.html">Aplicações</a></li>
             <li><a href="futuro.html">Futuro</a></li>
             <li><a href="maquete.html">Maquete</a></li>
-          </ul>
-        </nav>
-      </div>
+        </ul>
     </div>
-    <div class="hosting_section layout_padding">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1 class="hosting_taital" style="color:#00ffff; font-weight:700; text-align:center;">
-              Assistente de Computação Quântica
-            </h1>
-            <p class="hosting_text" style="font-size:17px; line-height:1.8; color:#cfcfcf; text-align:center; max-width: 800px; margin: 0 auto 20px auto;">
-              Nossa IA é especializada em computação quântica. Peça para ela explicar um conceito,
-              definir um termo ou explorar as possibilidades deste campo fascinante.
-            </p>
-          </div>
-        </div>
 
-        <div class="row justify-content-center">
-            <div class="col-lg-10 col-md-12">
-                <div class="ai-container">
-                    <div class="ai-input-group">
-                        <input type="text" id="ai-prompt" placeholder="Ex: O que é um qubit?" class="ai-input">
-                        <button id="ai-submit" class="ai-button">
-                            <i data-lucide="send"></i>
-                        </button>
+    <main class="main_section">
+        <section class="hosting_section layout_padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1 class="hosting_taital">Assistente de Computação Quântica</h1>
+                        <p class="hosting_text mx-auto" style="max-width: 800px;">
+                            Nossa IA é especializada em computação quântica. Peça para ela explicar um conceito, definir um termo ou explorar as possibilidades deste campo fascinante.
+                        </p>
                     </div>
-                    <div class="ai-response-container">
-                         <div id="ai-response">Aguardando sua pergunta...</div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-12">
+                        <div class="ai-container">
+                            <div class="ai-input-group">
+                                <input type="text" id="ai-prompt" placeholder="Ex: O que é um qubit?" class="ai-input">
+                                <button id="ai-submit" class="ai-button">
+                                    <i data-lucide="send"></i>
+                                </button>
+                            </div>
+                            <div class="ai-response-container">
+                                <div id="ai-response">Aguardando sua pergunta...</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
+    </main>
+    <button id="fab-bloch-sphere" class="fab-bloch-sphere">
+        Explore a Esfera 3D
+    </button>
+    <footer class="copyright_section">
+        <div class="container">
+            <p class="copyright_text">2025 © Todos os Direitos Reservados | Design adaptado de <a href="https://html.design">Free Html Templates</a> via <a href="https://themewagon.com" target="_blank">ThemeWagon</a></p>
         </div>
-
-      </div>
-    </div>
-
-    <div class="copyright_section">
-      <div class="container">
-        <p class="copyright_text">
-          2025 © Todos os Direitos Reservados | Design adaptado de
-          <a href="https://html.design">Free Html Templates</a> via
-          <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
-        </p>
-      </div>
-    </div>
+    </footer>
 
     <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script>
-      // Renderiza os ícones do Lucide
-      lucide.createIcons();
-
-      document.addEventListener('DOMContentLoaded', () => {
-        const promptInput = document.getElementById('ai-prompt');
-        const responseDiv = document.getElementById('ai-response');
-        const submitButton = document.getElementById('ai-submit');
-
-        // NOVA FUNÇÃO: Efeito de máquina de escrever
-        function typeWriter(element, text, speed = 10) {
-            element.innerHTML = "";
-            element.classList.add('is-typing'); // Adiciona a classe para o cursor
-            let i = 0;
-
-            function type() {
-                if (i < text.length) {
-                    // Se encontrar o início de uma tag HTML, anexa a tag inteira de uma vez
-                    if (text.charAt(i) === '<') {
-                        const endIndex = text.indexOf('>', i);
-                        if (endIndex !== -1) {
-                            element.innerHTML += text.substring(i, endIndex + 1);
-                            i = endIndex;
-                        }
-                    } else {
-                        // Caso contrário, anexa um caractere de cada vez
-                        element.innerHTML += text.charAt(i);
-                    }
-                    i++;
-                    setTimeout(type, speed);
-                } else {
-                    element.classList.remove('is-typing'); // Remove a classe ao terminar
-                }
-            }
-            type();
-        }
-
-
-        const handleAIAssistant = async () => {
-            const query = promptInput.value.trim();
-            if (!query) return;
-
-            responseDiv.innerHTML = `<div style="display: flex; align-items: center;"><div class="loading-spinner"></div><span>Analisando os Qubits...</span></div>`;
-            submitButton.disabled = true;
-
-            try {
-                const systemPrompt = "Você é um físico quântico e um excelente professor. Sua missão é explicar conceitos complexos de computação quântica de forma clara, simples e empolgante para um público leigo e curioso. Use analogias do dia a dia sempre que possível. Responda em português do Brasil. Comece a resposta indo direto ao ponto, explicando o conceito solicitado. Mantenha as respostas concisas, mas informativas, idealmente em 2 ou 3 parágrafos. Finalize sempre incentivando a curiosidade do usuário e lembrando que este é um campo em rápida evolução.";
-
-                const apiKey = "AIzaSyBJ9nH-oCNQj9QIoHxsGIeO0QORydJSKpI";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-
-                const payload = {
-                    contents: [{
-                        parts: [{ text: query }]
-                    }],
-                    systemInstruction: {
-                        parts: [{ text: systemPrompt }]
-                    },
-                    generationConfig: {
-                      "temperature": 0.7,
-                      "topK": 1,
-                      "topP": 1,
-                      "maxOutputTokens": 2048,
-                    },
-                    safetySettings: [
-                      { "category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
-                      { "category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
-                      { "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
-                      { "category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
-                    ]
-                };
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await response.json();
-
-                if (!response.ok) {
-                    const errorDetails = result?.error?.message || response.statusText;
-                    throw new Error(`Erro na API: ${errorDetails}`);
-                }
-
-                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-
-                if (text) {
-                    const formattedText = text
-                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/\*/g, '')
-                        .replace(/\n/g, '<br>');
-                    
-                    // ATUALIZAÇÃO: Chama a função typeWriter em vez de inserir o HTML diretamente
-                    typeWriter(responseDiv, formattedText);
-
-                } else {
-                    throw new Error("A resposta da IA não continha texto válido.");
-                }
-
-            } catch (error) {
-                console.error("Erro no Assistente IA:", error);
-                responseDiv.innerHTML = `<strong>Desculpe, ocorreu uma anomalia quântica.</strong><br><br>Não consegui processar sua pergunta.<br><br><i>Detalhe do erro: ${error.message}</i>`;
-            } finally {
-                submitButton.disabled = false;
-            }
-        };
-
-        submitButton.addEventListener('click', handleAIAssistant);
-        promptInput.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter' && !submitButton.disabled) {
-            handleAIAssistant();
-          }
+        lucide.createIcons();
+        $('.menu_mobile_button').on('click', function() {
+            $('.mobile_menu').toggleClass('active');
         });
-      });
+
+        // Script da IA (mantido como estava, pois já é funcional)
+        document.addEventListener('DOMContentLoaded', () => {
+            const promptInput = document.getElementById('ai-prompt');
+            const responseDiv = document.getElementById('ai-response');
+            const submitButton = document.getElementById('ai-submit');
+
+            function typeWriter(element, text, speed = 20) {
+                element.innerHTML = "";
+                element.classList.add('is-typing');
+                let i = 0;
+                function type() {
+                    if (i < text.length) {
+                        if (text.charAt(i) === '<') {
+                            const endIndex = text.indexOf('>', i);
+                            if (endIndex !== -1) {
+                                element.innerHTML += text.substring(i, endIndex + 1);
+                                i = endIndex;
+                            }
+                        } else {
+                            element.innerHTML += text.charAt(i);
+                        }
+                        i++;
+                        setTimeout(type, speed);
+                    } else {
+                        element.classList.remove('is-typing');
+                    }
+                }
+                type();
+            }
+
+            const handleAIAssistant = async () => {
+                const query = promptInput.value.trim();
+                if (!query) return;
+
+                responseDiv.innerHTML = `<div style="display: flex; align-items: center;"><div class="loading-spinner"></div><span>Analisando os Qubits...</span></div>`;
+                submitButton.disabled = true;
+
+                try {
+                    const systemPrompt = "Você é um físico quântico e um excelente professor. Sua missão é explicar conceitos complexos de computação quântica de forma clara, simples e empolgante para um público leigo e curioso. Use analogias do dia a dia sempre que possível. Responda em português do Brasil. Comece a resposta indo direto ao ponto, explicando o conceito solicitado. Mantenha as respostas concisas, mas informativas, idealmente em 2 ou 3 parágrafos. Finalize sempre incentivando a curiosidade do usuário e lembrando que este é um campo em rápida evolução.";
+                    const apiKey = "AIzaSyBJ9nH-oCNQj9QIoHxsGIeO0QORydJSKpI";
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                    const payload = {
+                        contents: [{ parts: [{ text: query }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] },
+                        generationConfig: { "temperature": 0.7, "topK": 1, "topP": 1, "maxOutputTokens": 2048 },
+                        safetySettings: [
+                          { "category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+                          { "category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+                          { "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+                          { "category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+                        ]
+                    };
+                    const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    const result = await response.json();
+                    if (!response.ok) {
+                        const errorDetails = result?.error?.message || response.statusText;
+                        throw new Error(`Erro na API: ${errorDetails}`);
+                    }
+                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (text) {
+                        const formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*/g, '').replace(/\n/g, '<br>');
+                        typeWriter(responseDiv, formattedText);
+                    } else {
+                        throw new Error("A resposta da IA não continha texto válido.");
+                    }
+                } catch (error) {
+                    console.error("Erro no Assistente IA:", error);
+                    responseDiv.innerHTML = `<strong>Desculpe, ocorreu uma anomalia quântica.</strong><br><br>Não consegui processar sua pergunta.<br><br><i>Detalhe do erro: ${error.message}</i>`;
+                } finally {
+                    submitButton.disabled = false;
+                }
+            };
+            submitButton.addEventListener('click', handleAIAssistant);
+            promptInput.addEventListener('keydown', (event) => {
+              if (event.key === 'Enter' && !submitButton.disabled) {
+                handleAIAssistant();
+              }
+            });
+        });
+
+        // Efeito de BG com mouse
+        document.addEventListener('mousemove', function(e) {
+            document.body.style.setProperty('--mouse-x', e.clientX + 'px');
+            document.body.style.setProperty('--mouse-y', e.clientY + 'px');
+        });
+        
+        // Redirecionamento do Botão Flutuante
+        document.getElementById('fab-bloch-sphere').addEventListener('click', function() {
+            window.open('https://quantum-bloch.vercel.app/', '_blank');
+        });
     </script>
-  </body>
+</body>
 </html>
