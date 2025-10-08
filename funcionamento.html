@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fundamentos da Computação Quântica</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:400,700|Sen:400,700,800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+    />
+
+    <style>
+      /* ===== corrigir imagens do carrossel ===== */
+.testimonial_section .quick_img {
+  text-align: center;
+  margin: 20px auto 0;
+}
+
+/* força tamanho máximo, mantém proporção, evita distorção */
+.testimonial_section .quick_img img {
+  display: block;
+  width: 220px;        /* tamanho desejado na maioria das telas */
+  max-width: 80%;      /* responsivo */
+  height: auto;        /* mantém proporção */
+  max-height: 320px;   /* evita imagens muito altas */
+  object-fit: contain; /* garante que não irá esticar */
+  margin: 0 auto;
+  border-radius: 6px;  /* opcional */
+  background: transparent;
+}
+
+/* regra mais específica caso outro CSS esteja forçando altura */
+.testimonial_section .quick_img img[style] {
+  height: auto !important;
+  max-height: 320px !important;
+}
+
+/* centraliza verticalmente conteúdo do slide (opcional e útil) */
+.carousel-item .row {
+  align-items: center;
+}
+
+/* pequenos ajustes mobile */
+@media (max-width: 576px) {
+  .testimonial_section .quick_img img {
+    width: 160px;
+    max-height: 220px;
+  }
+}
+
+      body {
+        background-color: #0a0a0a;
+        color: #ffffff;
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+      }
+
+      h1 {
+        color: #00ffff;
+        margin-bottom: 15px;
+      }
+
+      .testimonial_section {
+        padding: 80px 0;
+        text-align: center;
+      }
+
+      .testimonial_text {
+        font-size: 18px;
+        margin: 20px auto;
+        max-width: 800px;
+      }
+
+      .ipsum_text {
+        font-size: 16px;
+        margin: 15px auto;
+        max-width: 750px;
+        color: #b8e9f1;
+      }
+
+      .quick_img img {
+        margin-top: 25px;
+        width: 120px;
+      }
+
+      /* ===== SETAS DO CARROSSEL ===== */
+      .carousel-control-prev,
+      .carousel-control-next {
+        width: 60px;
+        height: 60px;
+        background: rgba(0, 255, 255, 0.1);
+        border: 2px solid #00ffff;
+        border-radius: 50%;
+        top: 45%;
+        transition: all 0.3s ease;
+      }
+
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+        background-size: 60%;
+        filter: invert(100%) drop-shadow(0 0 5px #00ffff);
+      }
+
+      .carousel-control-prev:hover,
+      .carousel-control-next:hover {
+        background: #00ffff;
+        box-shadow: 0 0 15px #00ffff;
+      }
+
+      .carousel-control-prev {
+        left: -70px;
+      }
+
+      .carousel-control-next {
+        right: -70px;
+      }
+
+      @media (max-width: 768px) {
+        .carousel-control-prev,
+        .carousel-control-next {
+          width: 45px;
+          height: 45px;
+        }
+        .carousel-control-prev {
+          left: -40px;
+        }
+        .carousel-control-next {
+          right: -40px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <div class="header_section">
+      <div class="container">
+        <nav class="nav-futuristic">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="aiquantica.html" class="active">IA Quântica</a></li>
+            <li><a href="funcionamento.html">Funcionamento</a></li>
+            <li><a href="aplicacoes.html">Aplicações</a></li>
+            <li><a href="futuro.html">Futuro</a></li>
+            <li><a href="maquete.html">Maquete</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- CARROSSEL -->
+    <div class="testimonial_section layout_padding">
+      <div class="container">
+        <div
+          id="carouselExampleIndicators"
+          class="carousel slide"
+          data-ride="carousel"
+        >
+          <ol class="carousel-indicators">
+            <li
+              data-target="#carouselExampleIndicators"
+              data-slide-to="0"
+              class="active"
+            ></li>
+            <li
+              data-target="#carouselExampleIndicators"
+              data-slide-to="1"
+            ></li>
+            <li
+              data-target="#carouselExampleIndicators"
+              data-slide-to="2"
+            ></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <!-- SLIDE 1 -->
+            <div class="carousel-item active">
+              <div class="row">
+                <div class="col-md-12">
+                  <h1>Qubits: A Base da Computação Quântica</h1>
+                  <p class="testimonial_text">
+                    Um bit clássico funciona como uma moeda parada — ou é 0
+                    (cara) ou 1 (coroa). Já o qubit é como uma moeda girando no
+                    ar — pode representar 0, 1 ou ambos ao mesmo tempo.
+                  </p>
+                  <p class="ipsum_text">
+                    Essa característica permite que computadores quânticos
+                    processem múltiplas possibilidades simultaneamente,
+                    tornando-se muito mais poderosos.
+                  </p>
+                  <div class="quick_img">
+                    <img src="images/qubit.png" alt="Qubit" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SLIDE 2 -->
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-md-12">
+                  <h1>Superposição e Emaranhamento</h1>
+                  <p class="testimonial_text">
+                    A superposição permite que um qubit represente vários
+                    estados ao mesmo tempo, enquanto o emaranhamento conecta
+                    qubits de forma única.
+                  </p>
+                  <p class="ipsum_text">
+                    Essa conexão faz com que o estado de um qubit influencie o
+                    do outro — mesmo separados por grandes distâncias. Isso cria
+                    uma coordenação paralela extremamente poderosa.
+                  </p>
+                  <div class="quick_img">
+                    <img
+                      src="images/emaranhamento.jpg"
+                      alt="Emaranhamento"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SLIDE 3 -->
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-md-12">
+                  <h1>Interferência Quântica</h1>
+                  <p class="testimonial_text">
+                    A interferência quântica funciona como um filtro que
+                    reforça os resultados corretos e cancela os incorretos.
+                  </p>
+                  <p class="ipsum_text">
+                    Esse princípio ajuda os computadores quânticos a encontrarem
+                    respostas precisas e eficientes, reduzindo o tempo de cálculo
+                    e o erro nos resultados.
+                  </p>
+                  <div class="quick_img">
+                    <img
+                      src="images/interferencia.jpg"
+                      alt="Interferência Quântica"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SETAS DO CARROSSEL -->
+          <a
+            class="carousel-control-prev"
+            href="#carouselExampleIndicators"
+            role="button"
+            data-slide="prev"
+          >
+            <span
+              class="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
+            <span class="sr-only">Anterior</span>
+          </a>
+          <a
+            class="carousel-control-next"
+            href="#carouselExampleIndicators"
+            role="button"
+            data-slide="next"
+          >
+            <span
+              class="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
+            <span class="sr-only">Próximo</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- COPYRIGHT -->
+    <div class="copyright_section">
+      <div class="container">
+        <p class="copyright_text">
+          2025 © Todos os Direitos Reservados. Design adaptado por
+          <a href="#">Renan Moia</a>.
+        </p>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
