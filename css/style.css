@@ -1,0 +1,291 @@
+/*------------------------------------------------------------------
+    Template Name:  QuantumComp
+    Version: 1.0
+    Author: design-geeks
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+    [Typography]
+-------------------------------------------------------------------*/
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #cfcfcf;
+    line-height: 1.8;
+    
+    /* Efeito de BG com mouse: um gradiente radial na posição das variáveis (--mouse-x, --mouse-y) */
+    background: radial-gradient(
+        800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(0, 255, 255, 0.12), 
+        transparent 40%
+    ), #04091e;
+}
+
+.layout_padding {
+    padding-top: 90px;
+    padding-bottom: 90px;
+}
+
+.layout_padding_2 {
+    padding-top: 75px;
+    padding-bottom: 75px;
+}
+
+.layout_padding_2_top {
+    padding-top: 75px;
+}
+
+.layout_padding_2_bottom {
+    padding-bottom: 75px;
+}
+
+h1,
+h2 {
+    font-family: 'Sen', sans-serif;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 3.5rem;
+    color: #fff;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: #00ffff;
+}
+
+a {
+    color: #00ffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/*------------------------------------------------------------------
+    [Header]
+-------------------------------------------------------------------*/
+.header_section {
+    width: 100%;
+    padding: 20px 0;
+    background-color: rgba(4, 9, 30, 0.8);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.nav-futuristic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-futuristic ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+.nav-futuristic ul li a {
+    padding: 10px 20px;
+    color: #cfcfcf;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-futuristic ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #00ffff;
+    transition: width 0.3s ease;
+}
+
+.nav-futuristic ul li a:hover,
+.nav-futuristic ul li a.active {
+    color: #fff;
+}
+
+.nav-futuristic ul li a:hover::after,
+.nav-futuristic ul li a.active::after {
+    width: 100%;
+}
+
+/*------------------------------------------------------------------
+    [Main Content Sections]
+-------------------------------------------------------------------*/
+
+.main_section {
+    padding-top: 120px; /* Ajuste para o header fixo */
+}
+
+.hosting_section {
+    background: transparent;
+}
+
+.hosting_taital {
+    font-size: 2.8rem;
+    color: #00ffff;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hosting_text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #cfcfcf;
+}
+
+.click_bt a {
+    display: inline-block;
+    background-color: #00ffff;
+    color: #000;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.click_bt a:hover {
+    background-color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+}
+
+.hosting_img img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+}
+
+
+/* Estilos para as caixas de serviço/aplicações */
+.services_section {
+    background-color: transparent; 
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.service_box {
+    background: rgba(13, 26, 47, 0.5);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%; 
+}
+
+.service_box:hover {
+    transform: translateY(-10px);
+    border-color: #00ffff;
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
+}
+
+/* ATUALIZAÇÃO: Aumento e estilização das imagens dos pilares */
+.service_box .icon img {
+    width: 120px; /* Tamanho aumentado */
+    height: 120px;
+    object-fit: cover;
+    margin-bottom: 25px;
+    border-radius: 50%; /* Moldura circular */
+    border: 2px solid rgba(0, 255, 255, 0.3); /* Borda sutil */
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2); /* Efeito de brilho */
+}
+
+.service_box h3 {
+    color: #00ffff;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.service_box p {
+    font-size: 1rem;
+}
+
+
+/*------------------------------------------------------------------
+    [Footer]
+-------------------------------------------------------------------*/
+
+.copyright_section {
+    width: 100%;
+    padding: 25px 0;
+    background: #0a1a2f;
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.copyright_text {
+    margin: 0;
+    color: #cfcfcf;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.copyright_text a {
+    color: #00ffff;
+}
+
+.copyright_text a:hover {
+    color: #fff;
+}
+
+/* --- Botão Flutuante (FAB) para Esfera de Bloch --- */
+.fab-bloch-sphere {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #00ffff;
+    color: #000;
+    padding: 15px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-family: 'Sen', sans-serif;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: pulse-glow 2.5s infinite;
+}
+
+.fab-bloch-sphere:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 255, 255, 0.6);
+    color: #000;
+    animation-play-state: paused; /* Pausa a animação no hover para destacar a interação */
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.4), 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.8), 0 0 50px rgba(0, 255, 255, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.4), 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+}
