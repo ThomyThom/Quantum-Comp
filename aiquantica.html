@@ -99,6 +99,18 @@
       @keyframes spin {
         to { transform: rotate(360deg); }
       }
+
+      /* NOVO: Estilo para o cursor piscante */
+      #ai-response.is-typing::after {
+        content: '▋';
+        color: #00ffff;
+        animation: blink 1s step-end infinite;
+      }
+
+      @keyframes blink {
+        from, to { color: transparent; }
+        50% { color: #00ffff; }
+      }
     </style>
 
   </head>
@@ -140,7 +152,7 @@
                             <i data-lucide="send"></i>
                         </button>
                     </div>
-                    <div id="ai-response-container" class="ai-response-container">
+                    <div class="ai-response-container">
                          <div id="ai-response">Aguardando sua pergunta...</div>
                     </div>
                 </div>
@@ -172,6 +184,35 @@
         const responseDiv = document.getElementById('ai-response');
         const submitButton = document.getElementById('ai-submit');
 
+        // NOVA FUNÇÃO: Efeito de máquina de escrever
+        function typeWriter(element, text, speed = 20) {
+            element.innerHTML = "";
+            element.classList.add('is-typing'); // Adiciona a classe para o cursor
+            let i = 0;
+
+            function type() {
+                if (i < text.length) {
+                    // Se encontrar o início de uma tag HTML, anexa a tag inteira de uma vez
+                    if (text.charAt(i) === '<') {
+                        const endIndex = text.indexOf('>', i);
+                        if (endIndex !== -1) {
+                            element.innerHTML += text.substring(i, endIndex + 1);
+                            i = endIndex;
+                        }
+                    } else {
+                        // Caso contrário, anexa um caractere de cada vez
+                        element.innerHTML += text.charAt(i);
+                    }
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    element.classList.remove('is-typing'); // Remove a classe ao terminar
+                }
+            }
+            type();
+        }
+
+
         const handleAIAssistant = async () => {
             const query = promptInput.value.trim();
             if (!query) return;
@@ -183,7 +224,6 @@
                 const systemPrompt = "Você é um físico quântico e um excelente professor. Sua missão é explicar conceitos complexos de computação quântica de forma clara, simples e empolgante para um público leigo e curioso. Use analogias do dia a dia sempre que possível. Responda em português do Brasil. Comece a resposta indo direto ao ponto, explicando o conceito solicitado. Mantenha as respostas concisas, mas informativas, idealmente em 2 ou 3 parágrafos. Finalize sempre incentivando a curiosidade do usuário e lembrando que este é um campo em rápida evolução.";
 
                 const apiKey = "AIzaSyBJ9nH-oCNQj9QIoHxsGIeO0QORydJSKpI";
-                // ATUALIZAÇÃO: Alterado para o modelo gemini-2.5-flash-preview
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
                 const payload = {
@@ -225,9 +265,12 @@
                 if (text) {
                     const formattedText = text
                         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/\*/g, '') // Remove asteriscos que não são de negrito
+                        .replace(/\*/g, '')
                         .replace(/\n/g, '<br>');
-                    responseDiv.innerHTML = formattedText;
+                    
+                    // ATUALIZAÇÃO: Chama a função typeWriter em vez de inserir o HTML diretamente
+                    typeWriter(responseDiv, formattedText);
+
                 } else {
                     throw new Error("A resposta da IA não continha texto válido.");
                 }
