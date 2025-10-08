@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body>
+<body class="fade-out">
     <header class="header_section">
         <div class="container">
             <nav class="nav-futuristic">
@@ -109,13 +109,35 @@
         $('.menu_mobile_button').on('click', function() {
             $('.mobile_menu').toggleClass('active');
         });
-        
-        // Efeito de BG com mouse
+
+        // Efeito de BG com mouse aprimorado
         document.addEventListener('mousemove', function(e) {
-            document.body.style.setProperty('--mouse-x', e.clientX + 'px');
-            document.body.style.setProperty('--mouse-y', e.clientY + 'px');
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            document.body.style.setProperty('--mouse-x', x + 'vw');
+            document.body.style.setProperty('--mouse-y', y + 'vh');
         });
-        
+
+        // Efeito de transição de página (fade in/out)
+        window.onload = function() {
+            document.body.classList.remove('fade-out');
+            document.body.classList.add('fade-in');
+        };
+        document.querySelectorAll('a[href]').forEach(function(link) {
+            // Só aplica se for link interno
+            link.addEventListener('click', function(e) {
+                const url = link.getAttribute('href');
+                if (url && !url.startsWith('http') && !url.startsWith('#') && !link.hasAttribute('target')) {
+                    e.preventDefault();
+                    document.body.classList.remove('fade-in');
+                    document.body.classList.add('fade-out');
+                    setTimeout(function() {
+                        window.location.href = url;
+                    }, 500);
+                }
+            });
+        });
+
         // Redirecionamento do Botão Flutuante
         document.getElementById('fab-bloch-sphere').addEventListener('click', function() {
             window.open('https://quantum-bloch.vercel.app/', '_blank');
@@ -123,4 +145,5 @@
     </script>
 </body>
 
+</html>
 </html>

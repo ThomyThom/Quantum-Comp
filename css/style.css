@@ -14,12 +14,16 @@ body {
     color: #cfcfcf;
     line-height: 1.8;
     
-    /* Efeito de BG com mouse: um gradiente radial na posição das variáveis (--mouse-x, --mouse-y) */
-    background: radial-gradient(
-        800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-        rgba(0, 255, 255, 0.12), 
-        transparent 40%
-    ), #04091e;
+    /* Efeito de BG com mouse aprimorado */
+    background: #04091e;
+    background-image: radial-gradient(
+        400px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
+        rgba(0, 255, 255, 0.18),
+        transparent 70%
+    );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    transition: background-image 0.15s cubic-bezier(0.4,0,0.2,1), opacity 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 
 .layout_padding {
@@ -133,6 +137,7 @@ a:hover {
 
 .main_section {
     padding-top: 120px; /* Ajuste para o header fixo */
+    flex: 1 0 auto;
 }
 
 .hosting_section {
@@ -232,6 +237,10 @@ a:hover {
     padding: 25px 0;
     background: #0a1a2f;
     border-top: 1px solid rgba(0, 255, 255, 0.2);
+    position: relative;
+    bottom: 0;
+    left: 0;
+    flex-shrink: 0;
 }
 
 .copyright_text {
@@ -288,4 +297,27 @@ a:hover {
     100% {
         box-shadow: 0 0 10px rgba(0, 255, 255, 0.4), 0 0 20px rgba(0, 255, 255, 0.2);
     }
+}
+
+/* Efeito de transição de página (fade in/out) */
+body {
+    transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.fade-in {
+}
+
+.fade-out {
+    opacity: 0 !important;
+}
+
+/* Garante que o footer fique no final da página */
+html, body {
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
