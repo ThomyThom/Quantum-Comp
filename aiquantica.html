@@ -211,7 +211,7 @@
                 try {
                     const systemPrompt = "Você é um físico quântico e um excelente professor. Sua missão é explicar conceitos complexos de computação quântica de forma clara, simples e empolgante para um público leigo e curioso. Use analogias do dia a dia sempre que possível. Responda em português do Brasil. Comece a resposta indo direto ao ponto, explicando o conceito solicitado. Mantenha as respostas concisas, mas informativas, idealmente em 2 ou 3 parágrafos. Finalize sempre incentivando a curiosidade do usuário e lembrando que este é um campo em rápida evolução.";
                     const apiKey = "AIzaSyBJ9nH-oCNQj9QIoHxsGIeO0QORydJSKpI";
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
                     const payload = {
                         contents: [{ parts: [{ text: query }] }],
                         systemInstruction: { parts: [{ text: systemPrompt }] },
